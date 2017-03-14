@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet Control Search</title>
+	<meta charset="utf-8"/>
+
+  	<meta name='viewport' content='width=device-width, user-scalable=no initial-scale=1, maximum-scale=1'>
+	
+	<!--- CSS files --->
+	<link rel="stylesheet" href="css/leaflet.css" />
+	<link rel="stylesheet" href="css/Control.Geocoder.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/leaflet.draw.css" />
+	<link rel="stylesheet" href="css/L.Control.Zoomslider.css" />
+	<link rel="stylesheet" href="css/leaflet-routing-machine.css" />
+	<link rel="stylesheet" href="css/leaflet-raw-dem.css" /> 
+	<link rel="stylesheet" href="css/easy-button.css" />  
+	<link rel="stylesheet" href="css/leaflet.toolbar.css" />
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/uniform.agent.css"/>
+	<link rel="stylesheet" href="css/font-awesome.css"/>
+	<link rel="stylesheet" href="css/L.Control.Zoomslider.css"/>
+
+	<!--- JQuery files --->
+	<script src="jq/jquery.min.js"></script>
+	<script src="jq/jquery-1.10.1.min.js"></script>
+	<script src="jq/jquery-migrate-1.2.1.min.js"></script>
+	<script src="jq/jquery-ui.min.js"></script>
+	<script src="jq/jquery.uniform.min.js"></script>
+
+	<!--- JS files --->
+	<script src="js/leaflet.js"></script>
+	<script src="js/leaflet-src.js"></script>
+	<script src="js/Control.Geocoder.js"></script>
+	<script src="js/leaflet-hash.js"></script>
+	<script src="js/L.Control.Zoomslider.js"></script>
+	<script src="js/leaflet.geometryutil.js"></script>
+	<script src="js/UniformControl.js"></script>
+	<script src="js/leaflet.ajax.min.js"></script>
+	<script src="js/L.Control.Zoomslider.js"></script>
+
+	<!--- Required JS files for GraphHopper routing machine --->
+	<script src="js/leaflet-routing-machine.js"></script>
+	<script src="js/lrm-graphhopper.js"></script>
+
+	<!--- Required JS files for SRTM DEM file loader --->
+	<script src="js/leaflet-raw-dem.js"></script>
+	<script src="js/leaflet-raw-dem.min.js"></script>
+	<script src="js/colors.js"></script>
+	
+	<!--- Custom Colours for DEM --->
+	<script>L.colors['RGB'] = ['#ff0000','#00ff00', '#0000ff'];</script>
+
+	<!--- Required JS files for Drawing toolbar --->
+	<script src="js/leaflet.toolbar.js"></script>
+	<script src="js/leaflet.toolbar-src.js"></script>
+	<script src="js/leaflet.draw-src.js"></script>
+	<script src="js/leaflet.draw.js"></script>
+	<script src="src/edit/handler/Edit.SimpleShape.js"></script>
+	<script src="src/edit/handler/Edit.Circle.js"></script>
+	<script src="src/edit/handler/Edit.Path.js"></script>
+	<script src="src/edit/handler/Edit.Poly.js"></script>
+	<script src="src/edit/handler/Edit.Rectangle.js"></script>
+	<script src="src/edit/handler/Edit.Marker.js"></script>
+	<script src="src/edit/handler/Edit.Polyline.js"></script>
+	<script src="src/easy-button.js"></script>
+
+	<!--- Mapbox gl --->
+        <script src="src/leaflet-mapbox-gl.js"></script>
+        <link href="css/mapbox-gl.css" rel='stylesheet' />
+        <script src="src/mapbox-gl.js"></script>
+
+	<!--- Overpass API --->
+	<link rel="stylesheet" href="css/leaflet-geojson-selector.css" />
+	<script src="jq/jquery/dist/jquery.min.js"></script>
+	<script src="js/osmtogeojson.js"></script>
+	<script src="src/leaflet-geojson-selector.js"></script>
+
+</head>
+<body>
+	<div id="map" class="leaflet-container leaflet-fade-anim" tabindex="0"></div>
+    	<div id="geocode-selector"></div>
+
+	<script src="index.js"></script>
+</body>
+</html>

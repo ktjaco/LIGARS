@@ -1,0 +1,79 @@
+html, body, #map { 
+            margin: 0; 
+            height: 100%; 
+            width: 100%; 
+        }
+#geocode-selector {
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+}
+#geocode-selector .selected {
+	background-color: #0078A8;
+}
+.leaflet-editing-icon.marker-snapped {
+        background-color: yellow;
+    }
+
+.results {
+    background-color: white;
+    opacity: 0.8;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 320px;
+    height: 480px;
+    overflow-y: scroll;
+}
+
+#animated-marker-toggle{
+    width: 26px;
+    height: 26px;
+    transition-duration: .3s;
+	cursor: pointer;
+    }
+
+#animated-marker-toggle.pelias-active{
+        color: orange;
+         font-weight: bold;
+        }
+        
+#animated-marker-toggle.nominatim-active{
+        color: red;
+         font-weight: bold;
+        }
+        
+#animated-marker-toggle.google-active{
+        color: green;
+         font-weight: bold;
+        }
+
+#animated-overpass{
+    width: 26px;
+    height: 26px;
+    transition-duration: .3s;
+	cursor: pointer;
+    }
+
+#animated-overpass.remove-overpass-active{
+	color: orange
+	}
+
+#animated-overpass.add-overpass-active{
+	color: red	
+	}
+
+#animated-toolbar{
+    width: 26px;
+    height: 26px;
+    transition-duration: .3s;
+	cursor: pointer;
+    }
+
+#animated-toolbar.add-draw-active{
+    color: green
+    }
+
+#animated-toolbar.remove-draw-active{
+    color: red
+    }
