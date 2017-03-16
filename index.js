@@ -1,8 +1,8 @@
 (function() {
 
-	// Online OSM (used for demo purposes)
+	// Online OSM
 	var osmUrl2 = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-		osmAttrib = "OSM",
+		osmAttrib = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | ' + 'Kent Jacobs',
 		online_osm = L.tileLayer(osmUrl2, {
 			minZoom: 2,
 			maxZoom: 20,
@@ -42,7 +42,6 @@
 	var ghMarker = new ghIcon;
 
 	// Custom green marker, make this unique to google
-	// Google was just used for demo purposes
 	var GoogleIcon = L.Icon.extend({
 		options: {
 			iconUrl: 'images/google.png',
@@ -75,8 +74,6 @@
 		// turn on geocoder markers at start
 		layers: [online_osm,nominatim,pelias,google],
 
-		//drawControl: false,
-
 		// turn off zoom buttons
 		zoomControl: false,
 		minZoom: 2,
@@ -88,18 +85,11 @@
 		// call geocoders from L.Control.Geocoder.____ (Leaflet Control Geocoder plug-in)
 		geocoders = {
 
-			// Nominatim: http://localhost/nominatim/
-			'Nominatim': L.Control.Geocoder.nominatim(), // Document that we changed the URL in the original control.geocoder.js source, not the best
-			
-			// Pelias API: http://localhost:3100/v1/
-			'Pelias': L.Control.Geocoder.mapzen('search-5gFFq7I'),
-			
-			// Google geocoder needs an API key, this is not apart of the open source geocoders, just here for demo purposes
-			'Google': L.Control.Geocoder.google('AIzaSyDlmsdr-wCDaHNbaBM6N9JljQLIjRllCl8')
+			'Nominatim': L.Control.Geocoder.nominatim(), 	
+			'Pelias': L.Control.Geocoder.mapzen(''),
+			'Google': L.Control.Geocoder.google('')
 
 		},
-
-		drawnItems = new L.FeatureGroup(),
 
 		//selector = L.DomUtil.get('geocode-selector'),
 
@@ -194,42 +184,7 @@
 	// Call empty Layer group
 	var none = L.layerGroup();
 
-	// File load labels for SRTM DEM feature
-	L.Control.FileLayerLoad.TITLE = 'Load local BIL file (.zip)';
-	L.Control.FileLayerLoad.LABEL = '<img src="images/folder.png" width="20px"' + 
-					' style="-webkit-clip-path: inset(0 0 5px 0); -moz-clip-path: inset(0 0 5px 0); clip-path: inset(0 0 5px 0);">';
-
-	// Initalize the SRTM DEM file loader
-	var fileLayer = L.Control.fileLayerLoad({
-		// File size limit in kb (default: 1024) ?
-		fileSizeLimit: 100 * 1024,
-		// Restrict accepted file formats (default: .geojson, .kml, and .gpx) ?
-		formats: ['.zip'],
-		parsers: {
-			'zip': fileParser
-		},
-		binaryFormats: ['zip']
-	}).addTo(map);
-
-	var optionsControl = new L.OptionsControl();
-
-	map.on('overlayadd', function(e) {
-		optionsControl.addLayer(e.layer);
-	});
-
-	map.on('overlayremove', function(e) {
-		optionsControl.removeLayer(e.layer);
-	});
-
-	fileLayer.loader.on('data:loaded', function(e) {
-		layerSwitcher.addOverlay(e.layer, e.filename);
-		optionsControl.addLayer(e.layer);
-	});
-
-	fileLayer.loader.on('data:error', function(e) {
-		console.error(e.error.stack);
-	});
-
+	
 	// Console logs for the geocoder selected
 	function select(geocoder, name) {
 		searchProvider = name;
@@ -429,78 +384,13 @@
 		    }
 	});
 
-	// Initialise the FeatureGroup to store editable layers
-	var drawnItems = new L.FeatureGroup().addTo(map);
-	map.addLayer(drawnItems);
 
-	// Initialise the draw control and pass it the FeatureGroup of editable layers
-	var drawControl = new L.Control.Draw({
-		draw: {
-			position: 'topleft',
-			// Shape parameters
-			polygon: {
-				title: 'Draw a polygon',
-				allowIntersection: false,
-				drawError: {
-					color: '#b00b00',
-					timeout: 1000
-				},
-				shapeOptions: {
-					color: '#1f4ffb'
-				},
-				showArea: true
-			},
-			polyline: {
-				metric: true,
-				shapeOptions: {
-					color: '#fb1f1f'
-				}
-			},
-			circle: {
-				shapeOptions: {
-					color: '#662d91'
-				}
-			}
-		},
-		edit: {
-			featureGroup: drawnItems,
-		}
-	});
-	//map.addControl(drawControl);
-
-	map.on('draw:created', function (event) {
-		var layer = event.layer;
-		drawnItems.addLayer(layer);
-
-	});
-
-	map.on('draw:edited', function(e) {
-		var layers = e.layers;
-		var countOfEditedLayers = 0;
-		layers.eachLayer(function(layer) {
-			countOfEditedLayers++;
-		});
-		console.log("Edited " + countOfEditedLayers + " layers");
-	});
-
-	// variables for grid lines
-        var graticule = L.grid({
-                //redraw: 'moveend'
-        });
-
-        // Leaflet grid lines
-        var graticule1deg = L.graticule({
-                interval: 1
-        });
 
 	// Bottom left radio buttons
         var layerSwitcher = L.control.layers({
                 'OSM': online_osm,
 		'None': none
         }, {
-		'Drawn Items' : drawnItems,
-                'Graticule 1°': graticule1deg,
-                'Graticule (-z10)': graticule,
                	'Nominatim': nominatim,
                 'Pelias': pelias,
                 'Google': google,
@@ -517,54 +407,6 @@
                 return layer;
         }
 	layerSwitcher.addTo(map);
-
-	// Create a toggle button using the easy button plug-in for the drawing toolbar
-	var toggle = L.easyButton({
-		id: 'animated-toolbar',
-		position: 'topleft',
-		states: [{
-			stateName: 'add-draw',
-			icon: 'fa-paint-brush',
-			title: 'Open drawing toolbar',
-				onClick: function(control) {
-					map.addControl(drawControl);
-					control.state('remove-draw');
-				}
-	},{
-	    icon: 'fa-minus',
-	    stateName: 'remove-draw',
-	    onClick: function(control) {
-	      map.removeControl(drawControl);
-	      control.state('add-draw');
-	    },
-	    title: 'Hide drawing toolbar'
-	  }]
-	});
-
-	// Add drawing toolbar plugin toggle to map
-	toggle.addTo(map);
-
-	// Adds the drawn shape as a layer
-	map.on('draw:created', function(e) {
-		var type = e.layerType,
-			layer = e.layer;
-
-		if (type === 'marker') {
-			layer.bindPopup('A popup!');
-		}
-
-		drawnItems.addLayer(layer);
-	});
-
-	// Enable editing of the drawn shapes
-	map.on('draw:edited', function(e) {
-		var layers = e.layers;
-		var countOfEditedLayers = 0;
-		layers.eachLayer(function(layer) {
-			countOfEditedLayers++;waypoints
-		});
-		console.log("Edited " + countOfEditedLayers + " layers");
-	});
 
 	// Create a plan for the routing
 	var plan = new geoPlan(
@@ -783,7 +625,6 @@
 			pelias.clearLayers();
 			nominatim.clearLayers();
 			google.clearLayers();
-			drawnItems.clearLayers();
 			map.closePopup();
 		});
 
