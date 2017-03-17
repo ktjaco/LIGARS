@@ -337,7 +337,7 @@
 
 			// Event to geocode with google
 			L.DomEvent.on(googleButton, 'click', function() {
-				graphHopperRouting.getPlan().options.geocoder = new L.Control.Geocoder.Google('AIzaSyDlmsdr-wCDaHNbaBM6N9JljQLIjRllCl8');
+				graphHopperRouting.getPlan().options.geocoder = new L.Control.Geocoder.Google();
 				graphHopperRouting.spliceWaypoints(graphHopperRouting.getWaypoints());
 				console.log("Google route search");
 				}, this);
@@ -445,7 +445,7 @@
 			routeWhileDragging: true,
 
 			// Online GH routing
-			router: L.Routing.graphHopper('9fb6dd59-4e36-4dbe-a0cb-71d58a048bd1', {
+			router: L.Routing.graphHopper('', {
 				urlParameters: {
 					vehicle: 'car'
 				}
