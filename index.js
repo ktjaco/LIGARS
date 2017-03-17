@@ -104,7 +104,7 @@
 		btn, selection, marker;
 
 	// add the zoom slider control
-	map.addControl(new L.Control.Zoomslider());
+	//map.addControl(new L.Control.Zoomslider());
 
 	// add all of the controls to the map
 	control.addTo(map);
@@ -597,7 +597,7 @@
 			data: 'data=[out:json];(node(around:10,'+e.latlng.lat+','+e.latlng.lng+');way(around:10,'+e.latlng.lat+','+e.latlng.lng+'));(._;>;);out;relation(around:10,'+e.latlng.lat+','+e.latlng.lng+');(._;>;);out;',
 			type: 'post',
 			dataType: 'json',
-			url: 'http://overpass-api.de/api/interpreter',
+			url: 'https://overpass-api.de/api/interpreter',
 			success: function(json) {
 				//overpass.addTo(map);
 

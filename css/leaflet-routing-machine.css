@@ -7,8 +7,8 @@
 }
 
 .leaflet-control-container .leaflet-routing-container-hide {
-    width: 26px;
-    height: 26px;
+    width: 36px;
+    height: 36px;
 }
 
 .leaflet-routing-container h2 {
@@ -224,8 +224,8 @@
 .leaflet-routing-container-hide .leaflet-routing-collapse-btn {
     position: absolute;
     cursor: pointer;
-    left: 2px;
-    top: 2px;
+    left: 6px;
+    top: 6px;
     display: block;
     width: 23px;
     height: 23px;

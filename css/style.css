@@ -27,10 +27,11 @@ html, body, #map {
 }
 
 #animated-marker-toggle{
-    width: 26px;
-    height: 26px;
+    width: 36px;
+    height: 36px;
     transition-duration: .3s;
-	cursor: pointer;
+    cursor: pointer;
+    font-size: 25px;
     }
 
 #animated-marker-toggle.pelias-active{
@@ -40,7 +41,7 @@ html, body, #map {
         
 #animated-marker-toggle.nominatim-active{
         color: red;
-         font-weight: bold;
+        font-weight: bold;
         }
         
 #animated-marker-toggle.google-active{
@@ -70,10 +71,3 @@ html, body, #map {
 	cursor: pointer;
     }
 
-#animated-toolbar.add-draw-active{
-    color: green
-    }
-
-#animated-toolbar.remove-draw-active{
-    color: red
-    }
