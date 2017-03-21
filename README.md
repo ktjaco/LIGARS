@@ -19,8 +19,6 @@ sudo nano index.js
 Geocoders:
 ```javascript
 geocoders = {
-	'Nominatim': L.Control.Geocoder.nominatim(),
-	'Pelias': L.Control.Geocoder.mapzen(' API KEY HERE '),
 	'Google': L.Control.Geocoder.google(' API KEY HERE ')
 }
 ```
