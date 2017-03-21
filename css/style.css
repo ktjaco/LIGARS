@@ -34,7 +34,7 @@ html, body, #map {
     font-size: 25px;
     }
 
-#animated-marker-toggle.pelias-active{
+#animated-marker-toggle.photon-active{
         color: orange;
          font-weight: bold;
         }

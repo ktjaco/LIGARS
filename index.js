@@ -20,16 +20,16 @@
 	});
 	var nominatimMarker = new NominatimIcon;
 
-	// Custom orange marker, make this unique to pelias
-	var PeliasIcon = L.Icon.extend({
+	// Custom orange marker, make this unique to photon
+	var PhotonIcon = L.Icon.extend({
 		options: {
-			iconUrl: 'images/pelias.png',
+			iconUrl: 'images/photon.png',
 			iconSize: [25, 70],
 			iconAnchor: [12, 70],
 			popupAnchor: [0, - 60]
 		}
 	});
-	var peliasMarker = new PeliasIcon;
+	var photonMarker = new PhotonIcon;
 
 	var ghIcon = L.Icon.extend({
 		options: {
@@ -58,7 +58,7 @@
 	// Add a geocoder layer group for each geocoder
 	var nominatim = new L.LayerGroup();
 
-	var pelias = new L.LayerGroup();
+	var photon = new L.LayerGroup();
 
 	var google = new L.LayerGroup();
 
@@ -72,7 +72,7 @@
 		fullscreenControl: true,
 
 		// turn on geocoder markers at start
-		layers: [online_osm,nominatim,pelias,google],
+		layers: [online_osm,nominatim,photon,google],
 
 		// turn off zoom buttons
 		zoomControl: false,
@@ -86,7 +86,7 @@
 		geocoders = {
 
 			'Nominatim': L.Control.Geocoder.nominatim(), 	
-			'Pelias': L.Control.Geocoder.mapzen(''),
+			'Photon': L.Control.Geocoder.photon(''),
 			'Google': L.Control.Geocoder.google('')
 
 		},
@@ -148,7 +148,7 @@
 	// Default starting geocoder
 	select(geocoders['Nominatim'], 'Nominatim');
 
-	// Geocoder switcher between nominatim, pelias, google
+	// Geocoder switcher between nominatim, photon, google
 	var geocoderSwitcher = L.easyButton({
 		id: 'animated-marker-toggle',
 		states: [{
@@ -156,12 +156,12 @@
 			title: 'Search with Nominatim',
 			icon: '<span>N</span>',
 			onClick: function(control) {
-				select(geocoders['Pelias'], 'Pelias');
-				control.state('pelias');
+				select(geocoders['Photon'], 'Photon');
+				control.state('photon');
 			}
 		}, {
-			stateName: 'pelias',
-			title: 'Search with Pelias',
+			stateName: 'photon',
+			title: 'Search with Photon',
 			icon: '<span>P</span>',
 			onClick: function(control) {
 				select(geocoders['Google'], 'Google');
@@ -205,11 +205,11 @@
 			L.marker(markerLocation, {
 				icon: nominatimMarker
 			}).bindPopup(result.html || result.name).addTo(map).addTo(nominatim).openPopup();
-		} else if (searchProvider == "Pelias") {
+		} else if (searchProvider == "Photon") {
 			var markerLocation = new L.latLng(result.center)
 			L.marker(markerLocation, {
-				icon: peliasMarker
-			}).bindPopup(result.html || result.name).addTo(map).addTo(pelias).openPopup();
+				icon: photonMarker
+			}).bindPopup(result.html || result.name).addTo(map).addTo(photon).openPopup();
 		} else if (searchProvider == "Google") {
 			var markerLocation = new L.latLng(result.center)
 			L.marker(markerLocation, {
@@ -221,7 +221,7 @@
 	// Grouping the geocoders together for the radio buttons
 	var geocoders_group = {
 		"Nominatim": nominatim,
-		"Pelias": pelias,
+		"Photon": photon,
 		"Google": google
 	};
 
@@ -253,12 +253,12 @@
 	    return btn;
 	}
 
-	// Pelias search button
-	function createPeliasButton(label, container) {
+	// Photon search button
+	function createPhotonButton(label, container) {
 	    var btn = L.DomUtil.create('button', '', container);
 	    btn.setAttribute('type', 'button');
 	    btn.innerHTML = label;
-	    btn.title = "Search with Pelias";
+	    btn.title = "Search with Photon";
 	    return btn;
 	}
 
@@ -310,8 +310,8 @@
 				// Create a button for nominatim geocoding
 				nominatimButton = createNominatimButton('<font color="red">N</font>', container);
 
-				// Create a button for pelias geocoding
-				peliasButton = createPeliasButton('<font color="orange">P</font>', container);
+				// Create a button for photon geocoding
+				photonButton = createPhotonButton('<font color="orange">P</font>', container);
 
 				//http://gis.stackexchange.com/questions/193235/leaflet-routing-machine-how-to-dinamically-change-router-settings
 
@@ -349,11 +349,11 @@
 				console.log("Nominatim route search");	
 				}, this);
 
-			// Event to geocode with pelias
-			L.DomEvent.on(peliasButton, 'click', function() {
+			// Event to geocode with photon
+			L.DomEvent.on(photonButton, 'click', function() {
 				graphHopperRouting.getPlan().options.geocoder = new L.Control.Geocoder.Mapzen();
 				graphHopperRouting.setWaypoints(graphHopperRouting.getWaypoints());
-				console.log("Pelias route search");
+				console.log("Photon route search");
 				}, this);
 
 			// Event to generate walking routes
@@ -392,7 +392,7 @@
 		'None': none
         }, {
                	'Nominatim': nominatim,
-                'Pelias': pelias,
+                'Photon': photon,
                 'Google': google,
         }, {
             	collapsed: true,
@@ -622,7 +622,7 @@
 		// map.removeControl() removes map "controls"
 		L.DomEvent.on(remove, 'click', function() {
 			graphHopperRouting.getPlan().setWaypoints({latLng: L.latLng([0, 0])});
-			pelias.clearLayers();
+			photon.clearLayers();
 			nominatim.clearLayers();
 			google.clearLayers();
 			map.closePopup();
